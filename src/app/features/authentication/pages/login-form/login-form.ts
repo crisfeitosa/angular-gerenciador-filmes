@@ -2,8 +2,9 @@ import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { email, form, minLength, required, Field } from '@angular/forms/signals';
 import { UserApi } from '../../../../core/services/user-api';
 import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { tap } from 'rxjs';
+import { ILoginParams } from '../../models/login-params';
 
 @Component({
   selector: 'app-login-form',
@@ -18,7 +19,7 @@ export class LoginForm {
 
   loginErrorMessage = signal<string>('');
 
-  loginModel = signal({
+  loginModel = signal<ILoginParams>({
     email: '',
     password: '',
   });
@@ -31,19 +32,19 @@ export class LoginForm {
     minLength(fieldPath.password, 3, { message: 'A senha deve ter no mínimo 8 caracteres.' });
   });
 
-  login() {
-    const { email, password } = this.loginForm().value();
+  loginParams = signal<ILoginParams | undefined>(undefined);
 
-    this._userApi
-      .login(email, password)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe({
-        next: () => {
-          this._router.navigate(['/explore']);
-        },
-        error: (error: HttpErrorResponse) => {
-          this.loginErrorMessage.set(error.error.message);
-        },
-      });
+  loginResource = rxResource({
+    params: () => this.loginParams(),
+    stream: ({ params }) =>
+      this._userApi
+        .login(params.email, params.password)
+        .pipe(tap(() => this._router.navigate(['/explore']))),
+  });
+
+  login() {
+    const credentials = this.loginForm().value();
+
+    this.loginParams.set(credentials);
   }
 }
