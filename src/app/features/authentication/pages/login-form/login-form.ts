@@ -17,8 +17,6 @@ export class LoginForm {
   private readonly _userApi = inject(UserApi);
   private readonly _router = inject(Router);
 
-  loginErrorMessage = signal<string>('');
-
   loginModel = signal<ILoginParams>({
     email: '',
     password: '',
@@ -29,7 +27,7 @@ export class LoginForm {
     email(fieldPath.email, { message: 'O E-mail está inválido.' });
 
     required(fieldPath.password, { message: 'A senha é obrigatória.' });
-    minLength(fieldPath.password, 3, { message: 'A senha deve ter no mínimo 8 caracteres.' });
+    minLength(fieldPath.password, 8, { message: 'A senha deve ter no mínimo 8 caracteres.' });
   });
 
   loginParams = signal<ILoginParams | undefined>(undefined);
