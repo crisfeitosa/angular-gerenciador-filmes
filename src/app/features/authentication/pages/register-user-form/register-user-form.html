@@ -58,4 +58,10 @@
     (click)="register()">
     Criar
   </button>
+
+  @if (registerError()) {
+  <p class="text-sm font-bold text-red-400">{{ registerError() }}</p>
+  } @else {
+  <p class="text-sm font-bold text-red-400">&nbsp;</p>
+  }
 </div>
