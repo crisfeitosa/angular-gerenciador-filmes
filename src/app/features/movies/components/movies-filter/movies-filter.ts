@@ -1,12 +1,18 @@
-import { Component, input } from '@angular/core';
-import { MoviesListResponse } from '../../../../shared/types/movies-list-response';
+import { Component, model } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-movies-filter',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './movies-filter.html',
   styleUrls: ['./movies-filter.css'],
 })
 export class MoviesFilter {
-  movies = input<MoviesListResponse>([]);
+  title = model('');
+  category = model('');
+
+  clearFilter() {
+    this.title.set('');
+    this.category.set('');
+  }
 }
