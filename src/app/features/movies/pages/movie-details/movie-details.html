@@ -45,13 +45,13 @@
 
       <div class="flex items-center gap-2 pt-2" role="group" aria-label="Avaliação do filme">
         <div class="flex space-x-1">
-          @for (star of [1, 2, 3, 4, 5]; track $index) {
+          @for (filled of starsStatusFilled(); track $index) {
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="button" tabindex="0"
             [attr.aria-label]="'Avaliar com ' + ($index + 1) + ' estrelas'" [attr.data-rating]="$index + 1"
-            (click)="updateRating($event)" stroke-width="1.5" stroke="currentColor"
+            (click)="updateRating($index + 1)" stroke-width="1.5" stroke="currentColor"
             class="w-7 h-7 cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-purple-600 rounded-sm"
-            [class.fill-purple-500]="isStarFilled($index)" [class.text-purple-500]="isStarFilled($index)"
-            [class.fill-none]="!isStarFilled($index)" [class.text-gray-500]="!isStarFilled($index)">
+            [class.fill-purple-500]="filled" [class.text-purple-500]="filled" [class.fill-none]="!filled"
+            [class.text-gray-500]="!filled">
             <path stroke-linecap="round" stroke-linejoin="round"
               d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.42.502a.563.563 0 01.314.996l-4.116 3.626a.563.563 0 00-.166.568l1.328 5.4a.563.563 0 01-.86.638l-4.993-3.04a.563.563 0 00-.586 0l-4.993 3.04a.563.563 0 01-.86-.638l1.328-5.4a.563.563 0 00-.166-.568L2.09 9.853a.562.562 0 01.314-.996l5.42-.502a.562.562 0 00.475-.345l2.125-5.111z" />
           </svg>
