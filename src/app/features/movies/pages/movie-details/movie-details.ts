@@ -32,7 +32,6 @@ export class MovieDetails {
     return this.movieDetailsResource.value();
   });
 
-  isFavorite = signal(false);
   currentRating = signal<number | undefined>(undefined);
 
   starsStatusFilled = computed(() => {
@@ -55,6 +54,19 @@ export class MovieDetails {
       this._moviesApi
         .rateMovie(params.id, params.rating)
         .pipe(tap((movieUpdated) => this.movieDetailsResource.set(movieUpdated))),
+  });
+
+  isMovieFavoriteResource = rxResource({
+    params: () => this.id(),
+    stream: ({ params }) => this._favoritesApi.isMovieFavorites(+params),
+  });
+
+  isFavorite = linkedSignal(() => {
+    const ERROR_ON_RESPONSE = !!this.isMovieFavoriteResource.error();
+
+    if (ERROR_ON_RESPONSE) return false;
+
+    return this.isMovieFavoriteResource.value() ?? false;
   });
 
   toggleFavorite() {
