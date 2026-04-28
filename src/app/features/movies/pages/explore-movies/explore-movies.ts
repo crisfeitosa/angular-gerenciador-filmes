@@ -41,4 +41,9 @@ export class ExploreMovies {
   });
 
   adicionarFilme() {}
+
+  clearFilter() {
+    this.movieTitleFilter.set('');
+    this.movieCategoryFilter.set('');
+  }
 }
