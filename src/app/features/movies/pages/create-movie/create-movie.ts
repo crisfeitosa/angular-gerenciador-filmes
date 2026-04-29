@@ -64,8 +64,4 @@ export class CreateMovie {
 
     this.movieFormData.set(formData);
   }
-
-  cancel() {
-    console.log('Operação cancelada!');
-  }
 }
