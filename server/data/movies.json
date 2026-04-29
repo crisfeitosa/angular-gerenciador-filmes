@@ -18,5 +18,15 @@
     "caminhoImagem": "/uploads/image-1765666870177-14156342.jpg",
     "qtdVotos": 198,
     "mediaVotos": 4.7439
+  },
+  {
+    "id": 1777467297359,
+    "titulo": "Michael",
+    "descricao": "Michael é uma cinebiografia musical sobre o rei do pop Michael Jackson. O longa retrata a vida e o legado do cantor (Jaafar Jackson), desde a descoberta de seu espetacular talento como líder do Jackson Five até o impacto cultural de sua visão artística ímpar. Para além da música, este drama biográfico traça as ambições criativas de um homem que buscou ativamente se tornar um dos maiores artistas do mundo, destacando os passos dados por Jackson fora dos palcos. Performances icônicas de sua carreira solo, ainda, compõem esse retrato íntimo e nunca antes visto do artista.",
+    "genero": "Drama",
+    "anoLancamento": 2026,
+    "caminhoImagem": "/uploads/image-1777467297353-117148552.jpg",
+    "qtdVotos": 0,
+    "mediaVotos": 0
   }
 ]
